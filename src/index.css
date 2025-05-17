@@ -1,0 +1,120 @@
+html, body, #root {
+  height: 100% !important;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+main{
+    flex: 1 !important;
+}
+
+.cleanList{
+  list-style: none;
+}
+
+.cent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Header */
+
+header{
+  min-height: 150px;
+  background-color: rgb(69, 107, 189);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navBar{
+    display: flex;
+    gap: 25px;
+    color: white;
+    font-size: 25px;
+}
+
+.navBar li{
+color: white;
+}
+
+.toolsLinks{
+    display: flex;
+    gap: 45px;
+     color: white;
+     align-items: center;
+}
+
+.navLink{
+    color: inherit;
+    text-decoration: none;
+}
+
+li>a:hover{
+    color: rgb(145, 145, 145);
+    transition: ease-in-out 0.5s;
+}
+
+.headTools{
+  display: flex;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+/* Footer */
+
+footer{
+  height: 150px;
+  background-color: rgb(69, 107, 189);
+  color: white;
+  display: flex;
+  gap: 50px;
+  padding: 20px 50px;
+}
+
+footer ul li{
+  margin: 5px 0;
+}
+
+.card-img-top{
+  max-width: 100% !important;
+}
+
+
+/* Details */
+
+.detCont{
+  display: flex;
+  max-height: 100vh;
+}
+
+.prodCont{
+  width: 400%;
+  max-height: 100%;
+}
+
+.revCont{
+  width: 600%;
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.revBox{
+  padding: 15px;
+}
+
+/* Advanced Research */
+
+.advRes{
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.advRes > .col-6{
+  margin-bottom: 10px;
+}
