@@ -29,7 +29,7 @@ const Details = () => {
 
     return (
         <div className="container detCont">
-            {prod.id &&
+            {prod.id ?
                 <>
                     <div className="prodCont">
                         <DetailCard
@@ -39,7 +39,7 @@ const Details = () => {
                     <div className="revCont">
                         {prod.reviews && prod.reviews.map((rev, i) => {
                             return (
-                                <>  
+                                <>
                                     <div className="revBox" key={i}>
                                         <div className="d-flex justify-content-between mb-3">
                                             <h2>
@@ -64,6 +64,10 @@ const Details = () => {
                         })}
                     </div>
                 </>
+                :
+                <div className="cent">
+                    <img src="/loading.gif" alt="loading" />
+                </div>
             }
         </div>
     )

@@ -3,6 +3,11 @@ import { capitalize } from "../../App"
 const ProdCard = ({ prod }) => {
     return (
         <div className="card mb-5 text-center" >
+              {prod.hot &&
+            <div class="hot">
+                <p>HOT</p>
+            </div>
+            }
             <img src={import.meta.env.VITE_API_URL + "storage/prods/" + prod.img} alt={prod.nome} className="card-img-top" />
             <p className="card-title mb-3">
                 <b>
@@ -19,7 +24,7 @@ const ProdCard = ({ prod }) => {
             </p>
             <p className="card-text">
                 {prod.average_rating.toFixed(2)}
-                <i className="bi-star-fill ms-1" style={{color:"gold"}}></i>
+                <i className="bi-star-fill ms-1" style={{ color: "gold" }}></i>
             </p>
             <a href={"/prods/" + prod.id} className="btn btn-primary mt-2 fs-3">Dettagli</a>
         </div>

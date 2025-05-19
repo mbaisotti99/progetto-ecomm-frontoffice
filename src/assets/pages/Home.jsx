@@ -9,7 +9,7 @@ const Home = () => {
     useEffect(() =>{
         axios.get(import.meta.env.VITE_API_URL + "api/prods/best")
         .then((resp) =>{                        
-            setProds(Object.values(resp.data.data))
+            setProds(resp.data.data)
         })
     },[])
 
@@ -19,9 +19,9 @@ const Home = () => {
 
             <div className="row">
                 {
-                    prods ? prods.map((prod, i) =>{
+                    prods.length > 0 ? prods.map((prod, i) =>{
                         return(
-                            <div className="col-4" key={i}>
+                            <div className="col-4" key={prod.id}>
                                 <ProdCard 
                                 prod = {prod}
                                 />
@@ -29,7 +29,9 @@ const Home = () => {
                         )
                     }) 
                     :
-                    <h2>Caricamento...</h2> 
+                    <div className="cent">
+                        <img src="/loading.gif" alt="loading" />
+                    </div>
                 }
             </div>
         </div>

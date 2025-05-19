@@ -21,6 +21,24 @@ main{
   width: 100%;
 }
 
+.hot{
+    background-color: red;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    position: absolute;
+    display: flex;
+    align-items: center;    
+    color: white;
+    text-align: center;
+}
+
+.hot p{
+    position: relative;
+    top:  7px;
+    left: 5px;
+}
+
 /* Header */
 
 header{
@@ -118,3 +136,4 @@ footer ul li{
 .advRes > .col-6{
   margin-bottom: 10px;
 }
+

@@ -53,7 +53,7 @@ const Header = ({cats}) => {
                 <a href="http://127.0.0.1:8000/login" className="btn btn-primary align-items-center d-flex fs-3">Accedi</a>
                 <form action={handleSubmit} className="d-flex gap-3">
                     
-                    <input onChange={handleChange} type="text" name="search" id="search" className="form-control"/>
+                    <input onChange={handleChange} value={search} type="text" name="search" id="search" className="form-control"/>
                     <button className="btn" type="submit">
                         <i className="bi-search" style={{fontSize:"30px", color:"white"}}></i>
                     </button>
