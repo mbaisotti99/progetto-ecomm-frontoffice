@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'rc-slider/assets/index.css';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Layout from "./assets/pages/Layout"

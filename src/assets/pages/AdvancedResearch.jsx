@@ -1,11 +1,15 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css'
 import { capitalize } from "../../App"
 import ProdCard from "../components/ProdCard"
 
+
 const AdvancedResearch = () => {
 
-    // va fatto in modo che il prezzo minimo non possa salire sopra il massimo e vice versa
+
+    const [priceRange, setRange] = useState([0, 500])
 
     const [results, setResults] = useState([])
 
@@ -46,7 +50,7 @@ const AdvancedResearch = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        
+
         setErr(false)
 
         setErrMsg("Caricamento...")
@@ -59,18 +63,18 @@ const AdvancedResearch = () => {
         }
 
         axios.post(import.meta.env.VITE_API_URL + "api/advancedSearch", searchVals)
-        .then((resp) =>{
-            const result = resp.data
-            if (result.success) {
-                setResults(result.data)
-                setErrMsg( `${result.data.length == 1 ? "Trovato " : "Trovati "} ${resp.data.data.length} ${result.data.length == 1 ? " risultato" : " risultati"}`)
-            } else {
-                setErrMsg(result.message)
-                setErr(true)
-                setResults([])
-            }
+            .then((resp) => {
+                const result = resp.data
+                if (result.success) {
+                    setResults(result.data)
+                    setErrMsg(`${result.data.length == 1 ? "Trovato " : "Trovati "} ${resp.data.data.length} ${result.data.length == 1 ? " risultato" : " risultati"}`)
+                } else {
+                    setErrMsg(result.message)
+                    setErr(true)
+                    setResults([])
+                }
 
-        })
+            })
 
     }
 
@@ -128,6 +132,17 @@ const AdvancedResearch = () => {
 
     }
 
+    const changePrice = (range) => {
+        setRange(range)
+
+        setSearchVals((prev) => ({
+                ...prev,
+                "prezzoMin": range[0],
+                "prezzoMax": range[1],
+            }));
+
+    }
+
     return (
         <div className="container">
             <h1 className="text-center my-5">
@@ -151,7 +166,7 @@ const AdvancedResearch = () => {
                         }
                     </select>
                 </div>
-                <div className="col-6">
+                {/* <div className="col-6">
                     <label htmlFor="prezzoMin" className="form-label">Prezzo minimo:</label>
                     <div className="input-group">
                         <input onChange={onChange} type="number" name="prezzoMin" min={0} max={500} className="form-control" value={searchVals.prezzoMin} />
@@ -164,14 +179,40 @@ const AdvancedResearch = () => {
                         <input onChange={onChange} type="number" name="prezzoMax" min={1} max={500} value={searchVals.prezzoMax} className="form-control" />
                         <span className="input-group-text">€</span>
                     </div>
+                </div> */}
+                <div className="col-6">
+                    <div className="slideDiv">
+                        <p className="text-center">
+                            Range Prezzo
+                        </p>
+                        <div className="w-100 d-flex justify-content-between">
+                            <p>Minimo {priceRange[0]}€</p>
+                            <p>Massimo {priceRange[1]}€</p>
+                        </div>
+                        <div className="w-100 d-flex justify-content-center">
+                            <Slider 
+                                range
+                                min={0}
+                                max={500}
+                                step={1}
+                                value={priceRange}
+                                onChange={changePrice}
+                                allowCross={false}
+                                trackStyle={[{ backgroundColor: "#0d6efd" }]}
+                                handleStyle={[
+                                    { borderColor: "#0d6efd" },
+                                    { borderColor: "#0d6efd" }
+                                ]}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="col-6">
-                    {/* <p className="mb-0 mt-2">Taglie Disponibili: </p><br /> */}
-                    <div className="my-3">
+                    <div className="my-3 text-center">
                         <label htmlFor="tagliaFilter">Filtra per taglie</label>
                         <input id="tagliaFilter" className="ms-3" type="checkbox" onChange={setTagliaFilter} />
                     </div>
-                    <div className="row w-50">
+                    <div className="row">
                         {
                             isTagliaFiltered ?
                                 taglieArr.map((taglia, i) => {
@@ -187,8 +228,8 @@ const AdvancedResearch = () => {
                         }
                     </div>
                 </div>
-                <div className="col-6 d-flex justify-content-center align-items-center">
-                    <button className="btn btn-primary" style={{ height: "50px" }}>
+                <div className="d-flex justify-content-center align-items-center">
+                    <button className="btn btn-primary fs-3 d-flex align-items-center" style={{ height: "50px", width: "100px" }}>
                         Cerca
                     </button>
                 </div>
@@ -196,19 +237,19 @@ const AdvancedResearch = () => {
 
             <div className="resultContAdv row">
                 {
-                    errMsg ? 
-                <div className={`alert text-center ${err ? "alert-danger" : "alert-info"}`}>
-                    {errMsg}
-                </div>
-                :
-                ""
+                    errMsg ?
+                        <div className={`alert text-center ${err ? "alert-danger" : "alert-info"}`}>
+                            {errMsg}
+                        </div>
+                        :
+                        ""
                 }
                 {
-                    results.length > 0 && results.map((prod) =>{
-                        return(
+                    results.length > 0 && results.map((prod) => {
+                        return (
                             <div className="col-4">
-                                <ProdCard 
-                                prod={prod}
+                                <ProdCard
+                                    prod={prod}
                                 />
                             </div>
                         )

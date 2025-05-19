@@ -1,3 +1,5 @@
+
+
 html, body, #root {
   height: 100% !important;
   margin: 0;
@@ -139,4 +141,11 @@ footer ul li{
 
 .resultContAdv{
   margin: 25px 0;
+}
+
+/* Slider prezzo */
+
+.slideDiv{
+  width: 100%;
+  padding: 15px 0;
 }
