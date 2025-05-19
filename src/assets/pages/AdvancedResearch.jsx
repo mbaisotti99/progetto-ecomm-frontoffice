@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { capitalize } from "../../App"
+import ProdCard from "../components/ProdCard"
 
 const AdvancedResearch = () => {
 
@@ -44,9 +45,9 @@ const AdvancedResearch = () => {
     }, [])
 
     const onSubmit = (e) => {
-        setErr(false)
-
         e.preventDefault()
+        
+        setErr(false)
 
         setErrMsg("Caricamento...")
 
@@ -62,10 +63,11 @@ const AdvancedResearch = () => {
             const result = resp.data
             if (result.success) {
                 setResults(result.data)
-                setErrMsg( result.data.length == 1 ? "Trovato " : "Trovati " + resp.data.data.length + result.data.length == 1 ? " risultato" : " risultati")
+                setErrMsg( `${result.data.length == 1 ? "Trovato " : "Trovati "} ${resp.data.data.length} ${result.data.length == 1 ? " risultato" : " risultati"}`)
             } else {
                 setErrMsg(result.message)
                 setErr(true)
+                setResults([])
             }
 
         })
@@ -127,7 +129,7 @@ const AdvancedResearch = () => {
     }
 
     return (
-        <div className="container cent">
+        <div className="container">
             <h1 className="text-center my-5">
                 Ricerca Avanzata:
             </h1>
@@ -174,7 +176,7 @@ const AdvancedResearch = () => {
                             isTagliaFiltered ?
                                 taglieArr.map((taglia, i) => {
                                     return (
-                                        <div className="col-4 mb-3">
+                                        <div className="col-4 mb-3" key={i}>
                                             <input onChange={onChange} type="checkbox" name="taglie" value={taglia} id={taglia + "box"} />
                                             <label htmlFor={taglia + "box"}>{taglia}</label>
                                         </div>
@@ -191,6 +193,28 @@ const AdvancedResearch = () => {
                     </button>
                 </div>
             </form>
+
+            <div className="resultContAdv row">
+                {
+                    errMsg ? 
+                <div className={`alert text-center ${err ? "alert-danger" : "alert-info"}`}>
+                    {errMsg}
+                </div>
+                :
+                ""
+                }
+                {
+                    results.length > 0 && results.map((prod) =>{
+                        return(
+                            <div className="col-4">
+                                <ProdCard 
+                                prod={prod}
+                                />
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
