@@ -6,32 +6,38 @@ const Home = () => {
 
     const [prods, setProds] = useState([])
 
-    useEffect(() =>{
+    useEffect(() => {
         axios.get(import.meta.env.VITE_API_URL + "api/prods/best")
-        .then((resp) =>{                        
-            setProds(resp.data.data)
-        })
-    },[])
+            .then((resp) => {
+                setProds(resp.data.data)
+            })
+    }, [])
 
     return (
         <div className="container">
-            <h1 className="text-center my-5">I Nostri Prodotti Migliori!</h1>
+            <div className="d-flex justify-content-between align-items-center">
+                <h1 className="text-center my-5">I Nostri Prodotti Migliori!</h1>
+                <a href="/prods" className="btn btn-outline-primary d-flex
+align-items-center" style={{ height: "50px" }}>
+                    Sfoglia Catalogo
+                </a>
+            </div>
 
             <div className="row">
                 {
-                    prods.length > 0 ? prods.map((prod, i) =>{
-                        return(
+                    prods.length > 0 ? prods.map((prod, i) => {
+                        return (
                             <div className="col-4" key={prod.id}>
-                                <ProdCard 
-                                prod = {prod}
+                                <ProdCard
+                                    prod={prod}
                                 />
                             </div>
                         )
-                    }) 
-                    :
-                    <div className="cent">
-                        <img src="/loading.gif" alt="loading" />
-                    </div>
+                    })
+                        :
+                        <div className="cent">
+                            <img src="/loading.gif" alt="loading" />
+                        </div>
                 }
             </div>
         </div>

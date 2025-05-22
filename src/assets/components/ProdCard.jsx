@@ -1,14 +1,26 @@
+import { useState } from "react"
 import { capitalize } from "../../App"
 
 const ProdCard = ({ prod }) => {
+
+    const [loadedImg, setLoadedImg] = useState(false)
+
     return (
         <div className="card mb-5 text-center" >
-              {prod.hot &&
-            <div class="hot">
-                <p>HOT</p>
-            </div>
+            {prod.hot &&
+                <div className="hot">
+                    <p>HOT</p>
+                </div>
             }
-            <img src={import.meta.env.VITE_API_URL + "storage/prods/" + prod.img} alt={prod.nome} className="card-img-top" />
+            {
+                !loadedImg &&
+                <img src="/loading.gif" alt="loading" className="card-img-top" />
+            }
+            <img
+                src={import.meta.env.VITE_API_URL + "storage/prods/" + prod.img}
+                alt={prod.nome} className="card-img-top"
+                onLoad={() => setLoadedImg(true)}
+            />
             <p className="card-title mb-3">
                 <b>
                     {capitalize(prod.nome)}

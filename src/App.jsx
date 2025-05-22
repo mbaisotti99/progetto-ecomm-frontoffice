@@ -10,6 +10,7 @@ import FilteredCat from "./assets/pages/FilteredCat"
 import Details from "./assets/pages/Details";
 import Search from "./assets/pages/Search";
 import AdvancedResearch from "./assets/pages/AdvancedResearch";
+import Products from "./assets/pages/Products";
 
 
 export function capitalize(str) {
@@ -24,11 +25,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />} >
-            <Route path="/" element={<Home />} />
             <Route path="/advanced-research" element={<AdvancedResearch />} />
             <Route path="/prods/cat/:cat" element={<FilteredCat />} />
             <Route path="/prods/:id" element={<Details />} />
             <Route path="/prods/search/:search" element={<Search />} />
+            <Route path="/prods" element={<Products />} />
+            <Route path="/" element={<Home />} />
           </Route>
         </Routes>
       </BrowserRouter>

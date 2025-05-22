@@ -31,15 +31,18 @@ const Header = ({cats}) => {
                             Home
                         </a>
                     </li>
+                    <li>
+                        <a href="/prods" className="navLink">Catalogo</a>
+                    </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Categorie
                             </a>
                             <ul className="dropdown-menu">
-                                {cats.map((cat) => {
+                                {cats.map((cat, i) => {
                                     return (
-                                        <li><a className="dropdown-item" href={"/prods/cat/" + cat}>{capitalize(cat)}</a></li>
+                                        <li key={i}><a className="dropdown-item" href={"/prods/cat/" + cat}>{capitalize(cat)}</a></li>
                                     )
                                 })}
                             </ul>

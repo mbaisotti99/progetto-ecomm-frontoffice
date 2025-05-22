@@ -100,8 +100,8 @@ const AdvancedResearch = () => {
 
 
     const onChange = (e) => {
+        
         const { name, value, checked } = e.target;
-
 
 
         if (name == "taglie") {
@@ -127,9 +127,6 @@ const AdvancedResearch = () => {
             }));
         }
 
-
-        console.log(searchVals);
-
     }
 
     const changePrice = (range) => {
@@ -149,10 +146,14 @@ const AdvancedResearch = () => {
                 Ricerca Avanzata:
             </h1>
             <form className="advRes row mb-5" onSubmit={onSubmit}>
+
+                {/* Nome */}
                 <div className="col-6">
                     <label htmlFor="nome" className="form-label">Nome:</label>
                     <input onChange={onChange} type="text" name="nome" className="form-control" value={searchVals.nome} />
                 </div>
+
+                {/* Categoria */}
                 <div className="col-6">
                     <label htmlFor="categoria" className="form-label">Categoria:</label>
                     <select onChange={onChange} name="categoria" id="categoria" className="form-control">
@@ -166,20 +167,9 @@ const AdvancedResearch = () => {
                         }
                     </select>
                 </div>
-                {/* <div className="col-6">
-                    <label htmlFor="prezzoMin" className="form-label">Prezzo minimo:</label>
-                    <div className="input-group">
-                        <input onChange={onChange} type="number" name="prezzoMin" min={0} max={500} className="form-control" value={searchVals.prezzoMin} />
-                        <span className="input-group-text">€</span>
-                    </div>
-                </div>
-                <div className="col-6">
-                    <label htmlFor="prezzoMax" className="form-label">Prezzo massimo:</label>
-                    <div className="input-group">
-                        <input onChange={onChange} type="number" name="prezzoMax" min={1} max={500} value={searchVals.prezzoMax} className="form-control" />
-                        <span className="input-group-text">€</span>
-                    </div>
-                </div> */}
+                
+
+                {/* Prezzo Min-Max */}
                 <div className="col-6">
                     <div className="slideDiv">
                         <p className="text-center">
@@ -207,6 +197,9 @@ const AdvancedResearch = () => {
                         </div>
                     </div>
                 </div>
+
+                
+                {/* Taglia */}
                 <div className="col-6">
                     <div className="my-3 text-center">
                         <label htmlFor="tagliaFilter">Filtra per taglie</label>
@@ -228,11 +221,15 @@ const AdvancedResearch = () => {
                         }
                     </div>
                 </div>
+
+
                 <div className="d-flex justify-content-center align-items-center">
                     <button className="btn btn-primary fs-3 d-flex align-items-center" style={{ height: "50px", width: "100px" }}>
                         Cerca
                     </button>
                 </div>
+
+
             </form>
 
             <div className="resultContAdv row">
