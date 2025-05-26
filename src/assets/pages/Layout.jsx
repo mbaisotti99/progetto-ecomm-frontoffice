@@ -9,18 +9,18 @@ const Layout = () => {
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/cats")
-            .then((resp) => {                
+            .then((resp) => {
                 setCats(resp.data.data)
             })
     }, [])
     return (
         <>
-            <Header 
-            cats = {cats}/>
-            <main>
-                <Outlet />
-            </main>
-            <Footer />
+                <Header
+                    cats={cats} />
+                <main>
+                    <Outlet />
+                </main>
+                <Footer />
         </>
     )
 }

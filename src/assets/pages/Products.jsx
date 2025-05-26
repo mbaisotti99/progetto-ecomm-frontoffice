@@ -90,9 +90,27 @@ const Products = () => {
 
                 sorted.sort((a, b) => ascOrDesc ? a[order].localeCompare(b[order]) : b[order].localeCompare(a[order]))
 
+            } else if (order == "prezzo") {
+
+                sorted.sort((a, b) => {
+                    if (ascOrDesc) {
+                        return (
+                            (b.scontato == 1 ? b.prezzo - (b.prezzo / 100 * b.sconto) : b.prezzo)
+                            -
+                            (a.scontato == 1 ? a.prezzo - (a.prezzo / 100 * a.sconto) : a.prezzo)
+                        );
+                    } else {
+                        return (
+                            (a.scontato == 1 ? a.prezzo - (a.prezzo / 100 * a.sconto) : a.prezzo)
+                            -
+                            (b.scontato == 1 ? b.prezzo - (b.prezzo / 100 * b.sconto) : b.prezzo)
+                        );
+                    }
+                });
             } else {
 
-                sorted.sort((a, b) => ascOrDesc ? b.prezzo - a.prezzo : a.prezzo - b.prezzo)
+                sorted.sort((a, b) => ascOrDesc ? b.average_rating - a.average_rating : a.average_rating - b.average_rating)
+
             }
 
             setProds(sorted)
@@ -128,10 +146,10 @@ const Products = () => {
                 </div>
                 <div className="ascDesc">
                     <p>Ordine:</p>
-                    <label htmlFor="asc">Crescente {order == "nome" ? "(Z-A)" : "(1-9)"}</label>
+                    <label htmlFor="asc">Decrescente {order == "nome" ? "(A-Z)" : "(9-1)"}</label>
                     <input onChange={changeAscDesc
                     } type="radio" name="ascDesc" id="asc" value="asc" />
-                    <label htmlFor="desc">Decrescente {order == "nome" ? "(A-Z)" : "(9-1)"}</label>
+                    <label htmlFor="desc">Crescente {order == "nome" ? "(Z-A)" : "(1-9)"}</label>
                     <input onChange={changeAscDesc} type="radio" name="ascDesc" id="desc" defaultChecked value="desc" />
                 </div>
             </form>

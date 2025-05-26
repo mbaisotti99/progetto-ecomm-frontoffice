@@ -18,7 +18,7 @@ const Home = () => {
             <div className="d-flex justify-content-between align-items-center">
                 <h1 className="text-center my-5">I Nostri Prodotti Migliori!</h1>
                 <a href="/prods" className="btn btn-outline-primary d-flex
-align-items-center" style={{ height: "50px" }}>
+align-items-center fs-3" style={{ height: "50px" }}>
                     Sfoglia Catalogo
                 </a>
             </div>
@@ -27,7 +27,7 @@ align-items-center" style={{ height: "50px" }}>
                 {
                     prods.length > 0 ? prods.map((prod, i) => {
                         return (
-                            <div className="col-4" key={prod.id}>
+                            <div className="col-12 col-md-6 col-lg-4" key={prod.id}>
                                 <ProdCard
                                     prod={prod}
                                 />

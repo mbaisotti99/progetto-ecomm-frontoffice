@@ -29,11 +29,19 @@ const ProdCard = ({ prod }) => {
             <p className="card-text">
                 {capitalize(prod.categoria)}
             </p>
-            <p className="card-text">
-                <b>
+            <div className="price">
+                <p className={`card-text ${prod.scontato ? "oldPrice" : ""}`}>
                     {prod.prezzo}€
-                </b>
-            </p>
+                </p>
+                {
+                    prod.scontato == 1 &&
+                    <p className="card-text discountedPrice">{
+                        new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(
+                            prod.prezzo - prod.prezzo / 100 * prod.sconto,
+                        )
+                        } </p>
+                }
+            </div>
             <p className="card-text">
                 {prod.average_rating.toFixed(2)}
                 <i className="bi-star-fill ms-1" style={{ color: "gold" }}></i>

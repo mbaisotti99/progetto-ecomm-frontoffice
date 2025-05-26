@@ -9,6 +9,7 @@ body,
 
 main {
   flex: 1 !important;
+  padding-top: 130px;
 }
 
 .cleanList {
@@ -42,14 +43,21 @@ main {
   left: 5px;
 }
 
+
 /* Header */
 
 header {
-  min-height: 150px;
+  min-height: 120px;
   background-color: rgb(69, 107, 189);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-bottom: 130px;
 }
 
 .navBar {
@@ -89,16 +97,20 @@ li>a:hover {
 /* Footer */
 
 footer {
-  height: 150px;
+  height: 120px;
   background-color: rgb(69, 107, 189);
   color: white;
   display: flex;
   gap: 50px;
-  padding: 20px 50px;
+  padding: 0px 50px;
 }
 
 footer ul li {
   margin: 5px 0;
+}
+
+footer ul li a{
+  font-size: 14px;
 }
 
 .card-img-top {
@@ -107,6 +119,22 @@ footer ul li {
 
 
 /* Details */
+
+.oldPrice{
+  text-decoration: line-through;
+  font-weight: lighter;
+}
+
+.discountedPrice{
+  color: red;
+  font-weight: bolder;
+}
+
+.price{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
 
 .detCont {
   display: flex;
@@ -128,6 +156,13 @@ footer ul li {
   padding: 15px;
 }
 
+.buy{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
 /* Advanced Research */
 
 .advRes {
@@ -142,6 +177,13 @@ footer ul li {
 
 .resultContAdv {
   margin: 25px 0;
+}
+
+.disc{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
 }
 
 /* Slider prezzo */

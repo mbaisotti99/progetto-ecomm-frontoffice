@@ -24,6 +24,7 @@ const AdvancedResearch = () => {
         "prezzoMax": 500,
         "isTagliaFiltered": false,
         "taglie": [],
+        "discounted": false
     }
 
     const taglieArr = ["XS", "S", "M", "L", "XL", "XXL"]
@@ -64,10 +65,11 @@ const AdvancedResearch = () => {
 
         axios.post(import.meta.env.VITE_API_URL + "api/advancedSearch", searchVals)
             .then((resp) => {
+                
                 const result = resp.data
                 if (result.success) {
                     setResults(result.data)
-                    setErrMsg(`${result.data.length == 1 ? "Trovato " : "Trovati "} ${resp.data.data.length} ${result.data.length == 1 ? " risultato" : " risultati"}`)
+                    setErrMsg(`${result.data.length == 1 ? "Trovato " : "Trovati "} ${result.data.length} ${result.data.length == 1 ? " risultato" : " risultati"}`)
                 } else {
                     setErrMsg(result.message)
                     setErr(true)
@@ -100,7 +102,7 @@ const AdvancedResearch = () => {
 
 
     const onChange = (e) => {
-        
+
         const { name, value, checked } = e.target;
 
 
@@ -120,23 +122,32 @@ const AdvancedResearch = () => {
                 ...prev,
                 "categoria": value == cats ? cats : [value],
             }));
+        }else if (name == "discounted"){
+
+            setSearchVals((prev) =>{
+                return{
+                    ...prev,
+                    "discounted" : checked ? true : false,
+                }
+            })
+
         } else {
             setSearchVals((prev) => ({
                 ...prev,
                 [name]: value,
             }));
         }
-
+         
     }
 
     const changePrice = (range) => {
         setRange(range)
 
         setSearchVals((prev) => ({
-                ...prev,
-                "prezzoMin": range[0],
-                "prezzoMax": range[1],
-            }));
+            ...prev,
+            "prezzoMin": range[0],
+            "prezzoMax": range[1],
+        }));
 
     }
 
@@ -167,20 +178,26 @@ const AdvancedResearch = () => {
                         }
                     </select>
                 </div>
-                
+
 
                 {/* Prezzo Min-Max */}
                 <div className="col-6">
                     <div className="slideDiv">
-                        <p className="text-center">
-                            Range Prezzo
-                        </p>
+                        <div className="d-flex justify-content-around mb-3">
+                            <div className="d-flex align-items-center justify-content-center">
+                                    Range Prezzo
+                            </div>
+                            <div className="disc">
+                                <label htmlFor="discounted">Scontato</label>
+                                <input onChange={onChange} type="checkbox" name="discounted" id="discounted" />
+                            </div>
+                        </div>
                         <div className="w-100 d-flex justify-content-between">
                             <p>Minimo {priceRange[0]}€</p>
                             <p>Massimo {priceRange[1]}€</p>
                         </div>
                         <div className="w-100 d-flex justify-content-center">
-                            <Slider 
+                            <Slider
                                 range
                                 min={0}
                                 max={500}
@@ -198,7 +215,7 @@ const AdvancedResearch = () => {
                     </div>
                 </div>
 
-                
+
                 {/* Taglia */}
                 <div className="col-6">
                     <div className="my-3 text-center">
@@ -244,7 +261,7 @@ const AdvancedResearch = () => {
                 {
                     results.length > 0 && results.map((prod) => {
                         return (
-                            <div className="col-4">
+                            <div className="col-12 col-md-6 col-lg-4">
                                 <ProdCard
                                     prod={prod}
                                 />
